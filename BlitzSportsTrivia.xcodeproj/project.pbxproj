@@ -15,6 +15,7 @@
 		DA0AD61323FB5461007BB6C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA0AD61123FB5461007BB6C2 /* LaunchScreen.storyboard */; };
 		DA0AD61E23FB5461007BB6C2 /* BlitzSportsTriviaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0AD61D23FB5461007BB6C2 /* BlitzSportsTriviaTests.swift */; };
 		DA0AD62923FB5461007BB6C2 /* BlitzSportsTriviaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0AD62823FB5461007BB6C2 /* BlitzSportsTriviaUITests.swift */; };
+		DA0AD63823FB54A3007BB6C2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0AD63723FB54A3007BB6C2 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		DA0AD62423FB5461007BB6C2 /* BlitzSportsTriviaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlitzSportsTriviaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA0AD62823FB5461007BB6C2 /* BlitzSportsTriviaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlitzSportsTriviaUITests.swift; sourceTree = "<group>"; };
 		DA0AD62A23FB5461007BB6C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA0AD63723FB54A3007BB6C2 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		DA0AD60523FB545E007BB6C2 /* BlitzSportsTrivia */ = {
 			isa = PBXGroup;
 			children = (
+				DA0AD63623FB5488007BB6C2 /* Model */,
 				DA0AD60623FB545E007BB6C2 /* AppDelegate.swift */,
 				DA0AD60823FB545E007BB6C2 /* SceneDelegate.swift */,
 				DA0AD60A23FB545E007BB6C2 /* ContentView.swift */,
@@ -134,6 +137,14 @@
 				DA0AD62A23FB5461007BB6C2 /* Info.plist */,
 			);
 			path = BlitzSportsTriviaUITests;
+			sourceTree = "<group>";
+		};
+		DA0AD63623FB5488007BB6C2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DA0AD63723FB54A3007BB6C2 /* Player.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA0AD63823FB54A3007BB6C2 /* Player.swift in Sources */,
 				DA0AD60723FB545E007BB6C2 /* AppDelegate.swift in Sources */,
 				DA0AD60923FB545E007BB6C2 /* SceneDelegate.swift in Sources */,
 				DA0AD60B23FB545E007BB6C2 /* ContentView.swift in Sources */,
