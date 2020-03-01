@@ -72,5 +72,11 @@ class Player{
         totalXP = totalXP + (XPArr[level-1] / 10)
     }
 //---------------------------------------------------------------
-    
+    /*
+     baseLossXP() subtracts a base XP from the player's totalXP after a loss
+     Amount of base xp is 5% the total xp needed for the next level
+     */
+    func baseLossXP(){
+        totalXP = totalXP - (XPArr[level-1] / 20)
+    }
 }

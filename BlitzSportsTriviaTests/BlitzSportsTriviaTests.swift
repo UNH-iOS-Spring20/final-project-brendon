@@ -57,11 +57,16 @@ class BlitzSportsTriviaTests: XCTestCase {
         XCTAssertEqual(56000, player1?.totalXP)//Since Bruce has 50000xp, he is in level 4. Therefore, his base win xp should add 6000 (10% of 60000) to his total xp.
     }
     
+    func testPlayerBaseLossXP(){
+        let player1 = Player.init(name: "Bruce", totalXP: 50000, currStreak: 0)
+        player1?.baseLossXP()
+        XCTAssertEqual(47000, player1?.totalXP)//Since Bruce has 50000xp, he is in level 4. Therefore, his base win xp should subtract 3000 (5% of 60000) to his total xp.
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
         }
     }
-
 }
