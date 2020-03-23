@@ -15,23 +15,23 @@ class Player{
     let maxLevelXP5 = 120000 //12000xp is max level of the game
     let XPArr = [Int](arrayLiteral: 5000, 10000, 30000, 60000, 120000) //Array holding each levels xp values to rank up
     
-    var displayName:String
-    var totalXP:Int
-    var level:Int
-    var currStreak:Int = 0
-    var gameScore:Int = 0
+    var userName:String //Player's unique username that is displayed
+    var totalXP:Int //Player's total Career XP
+    var level:Int = 1 //Player's current level (based on xp)
+    var currStreak:Int = 0 //Player's current win streak
+    var gameScore:Int = 0 //Score in the current game
     
 //---------------------------------------------------------------
     //initializes a Player object
-    init?(name: String, totalXP:Int, currStreak:Int) {
-        if name.isEmpty || totalXP < 0 || currStreak < 0 {
+    init?(userName: String, totalXP:Int, currStreak:Int) {
+        if userName.isEmpty || totalXP < 0 || currStreak < 0 {
             return nil
         }
-        self.displayName = name
+        self.userName = userName
         self.totalXP = totalXP
         self.currStreak = currStreak
         self.gameScore = 0
-        level = 1
+        //level = 1
         setLevel()
     }
     
