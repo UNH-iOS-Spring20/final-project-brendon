@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 class Round{
     let db = Firestore.firestore()
-
+    
     var r:Int //round number
     var playerSpinning:Player
     var otherPlayer:Player
@@ -19,7 +19,7 @@ class Round{
     
     //var testQuest:String = "Hello There"
     
-    var questArr = [String]()
+    var questArr: [String] = []
     var corrAnsArr = [String]()
     var wrong1Arr = [String]()
     var wrong2Arr = [String]()
@@ -29,33 +29,44 @@ class Round{
         self.playerSpinning = p1
         self.otherPlayer = p2
         self.r = r
-        self.questArr = ["", "", "", "", ""]
+        self.questArr = [String](repeating: "", count: 100)
         generateQuestions()
+        
     }
     
     func spinWheel(){
         //playerSpinning will omit a category and spin the wheel
         //The category will be returned
-        print("queatArr[0]: ", self.questArr[0])
+        
     }
     
     func generateQuestions(){ // based on the players spin, will generate 20 randomized questions of that category
         var arr = [String]()
-        let nflQRef = db.collection("nfl-questions").document("0")
-        nflQRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                //print("Document data: \(dataDescription)")
-                arr.append(document.get("Question") as! String)
+        /*let nflQRef = db.collection("nfl-questions").document("0")
+         nflQRef.getDocument { (document, error) in
+         if let document = document, document.exists {
+         //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+         //print("Document data: \(dataDescription)")
+         arr.append(document.get("Question") as! String)
+         } else {
+         print("Document does not exist")
+         }*/
+        
+        db.collection("nfl-questions").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
             } else {
-                print("Document does not exist")
+                for document in querySnapshot!.documents {
+                    arr.append(document.get("Question") as! String)
+                    print(document.get("Question") as! String)
+                    
+                }
             }
             
             self.questArr = arr //must set questArr here because firebase has an asynchronous nature
-            //print("queatArr[0]: ", self.questArr[0])
-            //self.spinWheel()
+            
         }
-        
+        //print("qA[15]: ", questArr[15])
     }
     
     

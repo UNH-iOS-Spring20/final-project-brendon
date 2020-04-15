@@ -14,7 +14,7 @@ struct QuestionScreen: View {
     var body: some View {
         ZStack{
             VStack(){
-                Text(game.round.questArr[0]).padding(.all)
+                Text(game.round.questArr[19]).padding(.all)
                 
                 Button(action: {}) {
                     Text(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/).padding(.all)
