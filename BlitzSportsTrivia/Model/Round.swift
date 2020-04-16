@@ -30,6 +30,10 @@ class Round{
         self.otherPlayer = p2
         self.r = r
         self.questArr = [String](repeating: "", count: 100)
+        self.corrAnsArr = [String](repeating: "", count: 100)
+        self.wrong1Arr = [String](repeating: "", count: 100)
+        self.wrong2Arr = [String](repeating: "", count: 100)
+        self.wrong3Arr = [String](repeating: "", count: 100)
         generateQuestions()
         
     }
@@ -41,7 +45,11 @@ class Round{
     }
     
     func generateQuestions(){ // based on the players spin, will generate 20 randomized questions of that category
-        var arr = [String]()
+        var qArr = [String]()
+        var cArr = [String]()
+        var wArr1 = [String]()
+        var wArr2 = [String]()
+        var wArr3 = [String]()
         /*let nflQRef = db.collection("nfl-questions").document("0")
          nflQRef.getDocument { (document, error) in
          if let document = document, document.exists {
@@ -57,14 +65,21 @@ class Round{
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    arr.append(document.get("Question") as! String)
-                    print(document.get("Question") as! String)
-                    
+                    qArr.append(document.get("Question") as! String)
+                    //print(document.get("Question") as! String)
+                    cArr.append(document.get("CorrectAnswer") as! String)
+                    wArr1.append(document.get("WrongAnswer1") as! String)
+                    wArr2.append(document.get("WrongAnswer2") as! String)
+                    wArr3.append(document.get("WrongAnswer3") as! String)
                 }
             }
             
-            self.questArr = arr //must set questArr here because firebase has an asynchronous nature
-            
+            //must set question and answer Arrays here because firebase has an asynchronous nature
+            self.questArr = qArr
+            self.corrAnsArr = cArr
+            self.wrong1Arr = wArr1
+            self.wrong2Arr = wArr2
+            self.wrong3Arr = wArr3
         }
         //print("qA[15]: ", questArr[15])
     }

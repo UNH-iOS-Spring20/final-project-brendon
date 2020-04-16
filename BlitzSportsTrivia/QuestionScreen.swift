@@ -14,13 +14,24 @@ struct QuestionScreen: View {
     var body: some View {
         ZStack{
             VStack(){
-                Text(game.round.questArr[19]).padding(.all)
+                Text(game.round.questArr[18]).padding(.all)
                 
                 Button(action: {}) {
-                    Text(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/).padding(.all)
+                    Text(game.round.corrAnsArr[18]).padding(.all)
                     
                 }
-                
+                Button(action: {}) {
+                    Text(game.round.wrong1Arr[18]).padding(.all)
+                    
+                }
+                Button(action: {}) {
+                    Text(game.round.wrong2Arr[18]).padding(.all)
+                    
+                }
+                Button(action: {}) {
+                    Text(game.round.wrong3Arr[18]).padding(.all)
+                    
+                }
             }
         }
         //.background(Color(hue: 1.0, saturation: 0.022, brightness: 0.811))
