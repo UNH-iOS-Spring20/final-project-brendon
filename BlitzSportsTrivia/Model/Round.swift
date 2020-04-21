@@ -15,25 +15,37 @@ class Round{
     var r:Int //round number
     var playerSpinning:Player
     var otherPlayer:Player
-    //var ref = Database.database().reference()
+    var qIndex:Int //index of current Question
+
+    var choiceSelected:Int //index of the answer selected
     
-    //var testQuest:String = "Hello There"
+    
+    var roundScore:Int
+    var answerStreak:Int
     
     var questArr: [String] = []
     var corrAnsArr = [String]()
     var wrong1Arr = [String]()
     var wrong2Arr = [String]()
     var wrong3Arr = [String]()
+    var displayAns = [String]()
     
     init(p1: Player, p2: Player, r: Int) {
         self.playerSpinning = p1
         self.otherPlayer = p2
         self.r = r
+        self.qIndex = 0
+        self.roundScore = 0 //stores player's current round score
+        self.answerStreak = 0
+        self.choiceSelected = -1 //-1 before an answer is selected
+        
+        //All of the arrays involoving questions/answers initialized below
         self.questArr = [String](repeating: "", count: 100)
         self.corrAnsArr = [String](repeating: "", count: 100)
         self.wrong1Arr = [String](repeating: "", count: 100)
         self.wrong2Arr = [String](repeating: "", count: 100)
         self.wrong3Arr = [String](repeating: "", count: 100)
+        self.displayAns = [String](repeating: "", count: 4)
         generateQuestions()
         
     }
@@ -50,15 +62,6 @@ class Round{
         var wArr1 = [String]()
         var wArr2 = [String]()
         var wArr3 = [String]()
-        /*let nflQRef = db.collection("nfl-questions").document("0")
-         nflQRef.getDocument { (document, error) in
-         if let document = document, document.exists {
-         //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-         //print("Document data: \(dataDescription)")
-         arr.append(document.get("Question") as! String)
-         } else {
-         print("Document does not exist")
-         }*/
         
         db.collection("nfl-questions").getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -80,11 +83,29 @@ class Round{
             self.wrong1Arr = wArr1
             self.wrong2Arr = wArr2
             self.wrong3Arr = wArr3
+            print(self.wrong1Arr[0])
+            self.displayAns = [self.corrAnsArr[0], self.wrong1Arr[0], self.wrong2Arr[0], self.wrong3Arr[0]]
+            
+            print(self.displayAns[0])
+            self.displayAns.shuffle() //randomizes the order of the array answers
         }
-        //print("qA[15]: ", questArr[15])
     }
     
-    
+    func selectAns(){
+        if displayAns[choiceSelected] == corrAnsArr[qIndex]{
+            roundScore+=1
+            answerStreak+=1
+        }
+        else{
+            answerStreak = 0
+        }
+        
+        if qIndex < 19{
+            qIndex+=1
+            self.displayAns = [self.corrAnsArr[self.qIndex], self.wrong1Arr[self.qIndex], self.wrong2Arr[self.qIndex], self.wrong3Arr[self.qIndex]]
+                self.displayAns.shuffle() //randomizes the order of the array answers
+        }
+    }
     
     
 }

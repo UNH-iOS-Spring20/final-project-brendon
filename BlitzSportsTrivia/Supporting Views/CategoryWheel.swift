@@ -7,14 +7,20 @@
 //
 
 import SwiftUI
+import UIKit
 
-struct CategoryWheel: View {
+struct CategoryWheel: View{
+    //var wheel:WheelController
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        WheelControllerWrapper()
+            
+    
     }
 }
 
 struct CategoryWheel_Previews: PreviewProvider {
+    //static let wheel = WheelController()
     static var previews: some View {
         CategoryWheel()
     }

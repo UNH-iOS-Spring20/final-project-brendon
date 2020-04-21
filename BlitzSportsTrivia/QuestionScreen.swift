@@ -12,30 +12,42 @@ struct QuestionScreen: View {
     @EnvironmentObject var game: Game //allows for the use of round data
     
     var body: some View {
-        ZStack{
-            VStack(){
-                Text(game.round.questArr[18]).padding(.all)
+        VStack(){
+            Text("QIndex: \(game.round.qIndex)")
+            Text(game.round.questArr[game.round.qIndex]).padding(.all)
+            
+            Button(action: {
+                self.game.round.choiceSelected = 0
+                self.game.round.selectAns()
                 
-                Button(action: {}) {
-                    Text(game.round.corrAnsArr[18]).padding(.all)
-                    
-                }
-                Button(action: {}) {
-                    Text(game.round.wrong1Arr[18]).padding(.all)
-                    
-                }
-                Button(action: {}) {
-                    Text(game.round.wrong2Arr[18]).padding(.all)
-                    
-                }
-                Button(action: {}) {
-                    Text(game.round.wrong3Arr[18]).padding(.all)
-                    
-                }
+            }) {
+                Text(game.round.displayAns[0]).padding(.all)
+                
+            }
+            Button(action: {
+                self.game.round.choiceSelected = 1
+                self.game.round.selectAns()
+            }) {
+                Text(game.round.displayAns[1]).padding(.all)
+                
+            }
+            Button(action: {
+                self.game.round.choiceSelected = 2
+                self.game.round.selectAns()
+            }) {
+                Text(game.round.displayAns[2]).padding(.all)
+                
+            }
+            Button(action: {
+                self.game.round.choiceSelected = 3
+                self.game.round.selectAns()
+                
+            }) {
+                Text(game.round.displayAns[3]).padding(.all)
+                
             }
         }
-        //.background(Color(hue: 1.0, saturation: 0.022, brightness: 0.811))
-        
+        .background(Color(hue: 1.0, saturation: 0.022, brightness: 0.811))
     }
 }
 
