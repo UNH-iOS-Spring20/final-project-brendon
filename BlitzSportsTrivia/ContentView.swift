@@ -9,18 +9,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var game: Game
+    //@EnvironmentObject var game: Game
     var body: some View {
         //Text("Hello, World!")
         //MainScreen()
-        QuestionScreen()
+        //QuestionScreen()
+        SpinWheelScreen()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static let game = Game()
+    //static let game = Game()
     static var previews: some View {
-        ContentView().environmentObject(game)
-        //ContentView()
+        //ContentView().environmentObject(game)
+        ContentView()
     }
 }

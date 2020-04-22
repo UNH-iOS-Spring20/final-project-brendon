@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 
+//To convert UIView to SwiftUI View the UIViewControllerRepresentable must be used
 struct WheelControllerWrapper: UIViewControllerRepresentable {
 
     typealias UIViewControllerType = WheelController
@@ -22,4 +23,3 @@ struct WheelControllerWrapper: UIViewControllerRepresentable {
     }
 }
 
- 

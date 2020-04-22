@@ -13,9 +13,8 @@ struct CategoryWheel: View{
     //var wheel:WheelController
     
     var body: some View {
-        WheelControllerWrapper()
-            
-    
+        WheelControllerWrapper().scaledToFit()
+                .background(/*@START_MENU_TOKEN@*/Color(hue: 0.008, saturation: 0.944, brightness: 0.476)/*@END_MENU_TOKEN@*/)
     }
 }
 
