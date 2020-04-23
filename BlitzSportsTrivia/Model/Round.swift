@@ -9,7 +9,7 @@
 import SwiftUI
 import FirebaseFirestore
 
-class Round{
+class Round: ObservableObject{
     let db = Firestore.firestore()
     
     var r:Int //round number
@@ -23,12 +23,12 @@ class Round{
     var roundScore:Int
     var answerStreak:Int
     
-    var questArr: [String] = []
-    var corrAnsArr = [String]()
-    var wrong1Arr = [String]()
-    var wrong2Arr = [String]()
-    var wrong3Arr = [String]()
-    var displayAns = [String]()
+    @Published var questArr: [String] = []
+    @Published var corrAnsArr = [String]()
+    @Published var wrong1Arr = [String]()
+    @Published var wrong2Arr = [String]()
+    @Published var wrong3Arr = [String]()
+    @Published var displayAns = [String]()
     
     init(p1: Player, p2: Player, r: Int) {
         self.playerSpinning = p1

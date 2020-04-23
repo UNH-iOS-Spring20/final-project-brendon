@@ -8,13 +8,16 @@
 
 import SwiftUI
 
-class Game: ObservableObject {
+class Game: ObservableObject{
     var player1:Player
     var player2:Player
     var roundNum:Int = 0
-    @Published var round:Round
+    var round:Round
     
     init() {
+        
+        //All of the arrays involoving questions/answers initialized below
+        
         player1 = Player(userName: "Player 1", totalXP: 0, currStreak: 0)!
         player2 = Player(userName: "Player 2", totalXP: 250, currStreak: 1)!
         roundNum = 1

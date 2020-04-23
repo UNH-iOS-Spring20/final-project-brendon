@@ -9,41 +9,41 @@
 import SwiftUI
 
 struct QuestionScreen: View {
-    @EnvironmentObject var game: Game //allows for the use of round data
+    @EnvironmentObject var round: Round //allows for the use of round data
     
     var body: some View {
         VStack(){
-            Text("QIndex: \(game.round.qIndex)")
-            Text(game.round.questArr[game.round.qIndex]).padding(.all)
+            Text("QIndex: \(round.qIndex)")
+            Text(round.questArr[round.qIndex]).padding(.all)
             
             Button(action: {
-                self.game.round.choiceSelected = 0
-                self.game.round.selectAns()
+                self.round.choiceSelected = 0
+                self.round.selectAns()
                 
             }) {
-                Text(game.round.displayAns[0]).padding(.all)
+                Text(round.displayAns[0]).padding(.all)
                 
             }
             Button(action: {
-                self.game.round.choiceSelected = 1
-                self.game.round.selectAns()
+                self.round.choiceSelected = 1
+                self.round.selectAns()
             }) {
-                Text(game.round.displayAns[1]).padding(.all)
+                Text(round.displayAns[1]).padding(.all)
                 
             }
             Button(action: {
-                self.game.round.choiceSelected = 2
-                self.game.round.selectAns()
+                self.round.choiceSelected = 2
+                self.round.selectAns()
             }) {
-                Text(game.round.displayAns[2]).padding(.all)
+                Text(round.displayAns[2]).padding(.all)
                 
             }
             Button(action: {
-                self.game.round.choiceSelected = 3
-                self.game.round.selectAns()
+                self.round.choiceSelected = 3
+                self.round.selectAns()
                 
             }) {
-                Text(game.round.displayAns[3]).padding(.all)
+                Text(round.displayAns[3]).padding(.all)
                 
             }
         }
@@ -53,7 +53,8 @@ struct QuestionScreen: View {
 
 struct QuestionScreen_Previews: PreviewProvider {
     static let game = Game()
+    static let round = Round(p1: game.player1, p2: game.player2, r: game.roundNum)
     static var previews: some View {
-        QuestionScreen().environmentObject(game)
+        QuestionScreen().environmentObject(round)
     }
 }
