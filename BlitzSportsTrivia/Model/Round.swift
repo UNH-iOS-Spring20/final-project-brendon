@@ -12,6 +12,9 @@ import FirebaseFirestore
 class Round: ObservableObject{
     let db = Firestore.firestore()
     
+    @EnvironmentObject var screen:ScreenController
+    
+    
     var r:Int //round number
     var playerSpinning:Player
     var otherPlayer:Player
@@ -19,9 +22,12 @@ class Round: ObservableObject{
 
     var choiceSelected:Int //index of the answer selected
     
+    @Published var roundContinue:Bool = true
+    @Published var roundScore:Int
+    @Published var opRoundScore:Int //Other players round score
+    @Published var roundResult:String
     
-    var roundScore:Int
-    var answerStreak:Int
+    @Published var answerStreak:Int
     
     @Published var questArr: [String] = []
     @Published var corrAnsArr = [String]()
@@ -31,11 +37,14 @@ class Round: ObservableObject{
     @Published var displayAns = [String]()
     
     init(p1: Player, p2: Player, r: Int) {
+        self.roundContinue = true
         self.playerSpinning = p1
         self.otherPlayer = p2
         self.r = r
         self.qIndex = 0
         self.roundScore = 0 //stores player's current round score
+        self.opRoundScore = 0
+        self.roundResult = ""
         self.answerStreak = 0
         self.choiceSelected = -1 //-1 before an answer is selected
         
@@ -91,6 +100,20 @@ class Round: ObservableObject{
         }
     }
     
+    
+    func endRound(){
+        self.opRoundScore = Int(arc4random_uniform(13) + 2) //for testing purposes generates a random score between 2 and 14
+        if (self.roundScore > self.opRoundScore){
+            self.roundResult = "Winner"
+        }
+        else if(self.roundScore < self.opRoundScore){
+            self.roundResult = "Loser"
+        }
+        else{ self.roundResult = "Tie" }
+        
+        roundContinue = false //this lets question screen know that the round has ended.
+    }
+    
     func selectAns(){
         if displayAns[choiceSelected] == corrAnsArr[qIndex]{
             roundScore+=1
@@ -105,6 +128,7 @@ class Round: ObservableObject{
             self.displayAns = [self.corrAnsArr[self.qIndex], self.wrong1Arr[self.qIndex], self.wrong2Arr[self.qIndex], self.wrong3Arr[self.qIndex]]
                 self.displayAns.shuffle() //randomizes the order of the array answers
         }
+        else{ self.endRound() }
     }
     
     

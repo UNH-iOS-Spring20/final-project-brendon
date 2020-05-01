@@ -9,17 +9,28 @@
 import SwiftUI
 
 struct SpinWheelScreen: View {
-    var wheel = WheelController()
+    @EnvironmentObject var screen: ScreenController
+    @EnvironmentObject var wheel:WheelController
     var body: some View {
         VStack{
             CategoryWheel()
+            Text("Category Selected: \(self.wheel.categorySelected)")
+            
+            Button(action: {
+                self.screen.qSButton()
+                self.wheel.resetCategorySelected()
+            }) {
+            Text("Continue")
+            }
+                
             Spacer()
         }
     }
 }
 
 struct SpinWheelScreen_Previews: PreviewProvider {
+    static let wheel = WheelController()
     static var previews: some View {
-        SpinWheelScreen()
+        SpinWheelScreen().environmentObject(wheel)
     }
 }

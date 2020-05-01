@@ -11,6 +11,8 @@ import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    var wheel = WheelController()
+    var screen = ScreenController()
     var game = Game()
     lazy var p1:Player = game.player1
     lazy var p2:Player = game.player2
@@ -28,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(round))
+            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(round).environmentObject(screen).environmentObject(wheel))
             self.window = window
             window.makeKeyAndVisible()
         }

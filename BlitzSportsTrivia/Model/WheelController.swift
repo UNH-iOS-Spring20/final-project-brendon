@@ -9,8 +9,9 @@
 import SwiftUI
 import SpinWheelControl
 
-class WheelController: UIViewController, SpinWheelControlDataSource, SpinWheelControlDelegate{
+class WheelController: UIViewController, ObservableObject, SpinWheelControlDataSource, SpinWheelControlDelegate{
 
+    @Published var categorySelected:String = ""
     let gold:UIColor = UIColor(red: 252.0/255.0, green: 194.0/255.0, blue: 0, alpha: 1.0) //Custom made gold color for the wheel
 
     
@@ -34,7 +35,7 @@ class WheelController: UIViewController, SpinWheelControlDataSource, SpinWheelCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        
         let buttonX = 150 //x-coordinate of button
         let buttonY = 375 //y-coordinate of button
         let buttonWidth = 100
@@ -78,10 +79,17 @@ class WheelController: UIViewController, SpinWheelControlDataSource, SpinWheelCo
     
     //Target was added in viewDidLoad for the valueChanged UIControlEvent
     @objc func spinWheelDidChangeValue(sender: AnyObject) {
-        print("Value changed to " + categoryNames[self.spinWheelControl.selectedIndex])
+        self.categorySelected = categoryNames[self.spinWheelControl.selectedIndex]
+        //print("Value changed to " + categoryNames[self.spinWheelControl.selectedIndex])
+        
+        print("Value changed to " + categorySelected)
+        //used to print the category selected to the WheelScreen
         
     }
     
+    func resetCategorySelected(){
+        categorySelected = ""
+    }
     
     func spinWheelDidEndDecelerating(spinWheel: SpinWheelControl) {
         print("The spin wheel did end decelerating.")

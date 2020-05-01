@@ -9,45 +9,59 @@
 import SwiftUI
 
 struct QuestionScreen: View {
-    @EnvironmentObject var round: Round //allows for the use of round data
+    @EnvironmentObject var round: Round//allows for the use of round data
+    @EnvironmentObject var screen:ScreenController
     
     var body: some View {
-        VStack(){
-            Text("QIndex: \(round.qIndex)")
-            Text(round.questArr[round.qIndex]).padding(.all)
-            
-            Button(action: {
-                self.round.choiceSelected = 0
-                self.round.selectAns()
+        ZStack{
+            VStack(){
+                Text("Round Score: \(round.roundScore)").foregroundColor(Color.gray)
+                Text("Current streak: \(round.answerStreak)").foregroundColor(Color.gray)
+                Text(round.questArr[round.qIndex]).padding(.all).font(.headline).foregroundColor(Color(hue: 0.129, saturation: 0.897, brightness: 0.954))
                 
-            }) {
-                Text(round.displayAns[0]).padding(.all)
-                
-            }
-            Button(action: {
-                self.round.choiceSelected = 1
-                self.round.selectAns()
-            }) {
-                Text(round.displayAns[1]).padding(.all)
-                
-            }
-            Button(action: {
-                self.round.choiceSelected = 2
-                self.round.selectAns()
-            }) {
-                Text(round.displayAns[2]).padding(.all)
-                
-            }
-            Button(action: {
-                self.round.choiceSelected = 3
-                self.round.selectAns()
-                
-            }) {
-                Text(round.displayAns[3]).padding(.all)
-                
-            }
-        }
-        .background(Color(hue: 1.0, saturation: 0.022, brightness: 0.811))
+                Button(action: {
+                    self.round.choiceSelected = 0
+                    self.round.selectAns()
+                    if self.round.roundContinue == false{
+                        self.screen.eRScreenButton()//switches screen to end round screen
+                    }
+                }) {
+                    Text(round.displayAns[0]).padding(.all).font(.headline).foregroundColor(Color.white)
+                    
+                }
+                Button(action: {
+                    self.round.choiceSelected = 1
+                    self.round.selectAns()
+                    if self.round.roundContinue == false{
+                        self.screen.eRScreenButton()//switches screen to end round screen
+                    }
+                }) {
+                    Text(round.displayAns[1]).padding(.all).font(.headline).foregroundColor(Color.white)
+                    
+                }
+                Button(action: {
+                    self.round.choiceSelected = 2
+                    self.round.selectAns()
+                    if self.round.roundContinue == false{
+                        self.screen.eRScreenButton()//switches screen to end round screen
+                    }
+                }) {
+                    Text(round.displayAns[2]).padding(.all).font(.headline).foregroundColor(Color.white)
+                    
+                }
+                Button(action: {
+                    self.round.choiceSelected = 3
+                    self.round.selectAns()
+                    if self.round.roundContinue == false{
+                        self.screen.eRScreenButton()//switches screen to end round screen
+                    }
+                    
+                }) {
+                    Text(round.displayAns[3]).padding(.all).font(.headline).foregroundColor(Color.white)
+                    
+                }
+            }.padding()
+        }.background(/*@START_MENU_TOKEN@*/Color(hue: 0.008, saturation: 0.944, brightness: 0.476)/*@END_MENU_TOKEN@*/)
     }
 }
 

@@ -9,13 +9,15 @@
 import SwiftUI
 
 struct MainScreen: View {
+    //@EnvironmentObject var game:Game
+    @EnvironmentObject var screen: ScreenController
     var body: some View {
         ZStack{
             //Color.black  //sets Background color to black
             
             VStack{
                 HeaderView() //A call to the default Logo header
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) { //MyStats button
+                Button(action: {}) { //MyStats button
                     Text("MyStats")
                         .font(.headline).foregroundColor(Color.white).padding(10)
                 }
@@ -27,8 +29,8 @@ struct MainScreen: View {
                     Text("Challenge Friend")
                         .font(.headline).foregroundColor(Color.white).padding(10)
                 }
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) { //Random opponent button
-                    Text("Random Opponent")
+                Button(action: {self.screen.sWScreenButton()}) { //play vs cpu button
+                    Text("Play vs CPU")
                         .font(.headline).foregroundColor(Color.white).padding(10)
                 }
                 Button(action: {}) { //Settings button
@@ -53,7 +55,8 @@ struct MainScreen: View {
 }
 
 struct MainScreen_Previews: PreviewProvider {
+    static let screen = ScreenController()
     static var previews: some View {
-        MainScreen()
+        MainScreen().environmentObject(screen)
     }
 }

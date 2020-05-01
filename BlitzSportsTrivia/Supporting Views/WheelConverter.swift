@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-//To convert UIView to SwiftUI View the UIViewControllerRepresentable must be used
+//To convert UIView to SwiftUI View the UIViewControllerRepresentable must be used as follows
 struct WheelControllerWrapper: UIViewControllerRepresentable {
 
     typealias UIViewControllerType = WheelController
