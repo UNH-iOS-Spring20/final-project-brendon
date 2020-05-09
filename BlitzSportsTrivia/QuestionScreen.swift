@@ -17,6 +17,17 @@ struct QuestionScreen: View {
             VStack(){
                 Text("Round Score: \(round.roundScore)").foregroundColor(Color.gray)
                 Text("Current streak: \(round.answerStreak)").foregroundColor(Color.gray)
+                if self.round.blitzAvail == true{
+                    Button(action: {
+                        self.round.blitzOn = true
+                        self.round.blitzAvail = false
+                    }) {
+                        Text("BLITZ!")
+                            .font(.headline)
+                            .foregroundColor(Color.white)
+                    }
+                }
+                
                 Text(round.questArr[round.qIndex]).padding(.all).font(.headline).foregroundColor(Color(hue: 0.129, saturation: 0.897, brightness: 0.954))
                 
                 Button(action: {

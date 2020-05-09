@@ -2,7 +2,8 @@
 //  WheelController.swift
 //  BlitzSportsTrivia
 //
-//  Created by B Malouf on 4/21/20.
+//  Created by Josh D. Henry 
+//  Edited by B Malouf on 4/21/20.
 //  Copyright © 2020 Brendon Malouf. All rights reserved.
 //
 

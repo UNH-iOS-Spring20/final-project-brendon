@@ -13,6 +13,7 @@ class Game: ObservableObject{
     var player1:Player
     var player2:Player
     var roundNum:Int = 0
+
     var round:Round
     
     init() {
@@ -23,18 +24,6 @@ class Game: ObservableObject{
         roundNum = 1
         round = Round(p1: player1, p2: player2, r: roundNum)
         //print(self.screen.screen)
-        //runGame()
-    }
-    
-    func runGame(){
-        
-        for roundNum in 0...5{ //5 rounds per game
-            if self.round.roundContinue == false
-            {
-                self.roundNum += 1
-                round = Round(p1: player1, p2: player2, r: roundNum)
-            }
-        }
         
     }
     

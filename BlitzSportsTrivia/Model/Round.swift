@@ -14,6 +14,7 @@ class Round: ObservableObject{
     
     @EnvironmentObject var screen:ScreenController
     
+    //var collectionArr: [String] = []
     
     var r:Int //round number
     var playerSpinning:Player
@@ -22,12 +23,15 @@ class Round: ObservableObject{
 
     var choiceSelected:Int //index of the answer selected
     
+    @Published var blitzAvail:Bool = false
+    @Published var blitzOn:Bool = false
     @Published var roundContinue:Bool = true
-    @Published var roundScore:Int
+    @Published var roundScore:Int //stores player's current round score
     @Published var opRoundScore:Int //Other players round score
     @Published var roundResult:String
     
     @Published var answerStreak:Int
+    @Published var strikes:Int //keeps track of how many wrong answers the player got wrong in the round
     
     @Published var questArr: [String] = []
     @Published var corrAnsArr = [String]()
@@ -37,12 +41,15 @@ class Round: ObservableObject{
     @Published var displayAns = [String]()
     
     init(p1: Player, p2: Player, r: Int) {
+        self.blitzAvail = false
+        self.blitzOn = false
         self.roundContinue = true
         self.playerSpinning = p1
         self.otherPlayer = p2
         self.r = r
         self.qIndex = 0
-        self.roundScore = 0 //stores player's current round score
+        self.roundScore = 0
+        self.strikes = 0
         self.opRoundScore = 0
         self.roundResult = ""
         self.answerStreak = 0
@@ -112,23 +119,39 @@ class Round: ObservableObject{
         else{ self.roundResult = "Tie" }
         
         roundContinue = false //this lets question screen know that the round has ended.
+         
     }
     
     func selectAns(){
         if displayAns[choiceSelected] == corrAnsArr[qIndex]{
-            roundScore+=1
-            answerStreak+=1
+            if blitzOn == true{
+                roundScore+=2
+            }
+            else{
+                roundScore+=1
+                answerStreak+=1
+                if answerStreak == 5 && blitzAvail == false{
+                    blitzAvail = true
+                }
+            }
         }
         else{
+            blitzOn = false
             answerStreak = 0
+            strikes+=1
         }
         
-        if qIndex < 19{
+        if qIndex < 19 && strikes < 3{
             qIndex+=1
             self.displayAns = [self.corrAnsArr[self.qIndex], self.wrong1Arr[self.qIndex], self.wrong2Arr[self.qIndex], self.wrong3Arr[self.qIndex]]
                 self.displayAns.shuffle() //randomizes the order of the array answers
         }
-        else{ self.endRound() }
+        else{
+            self.qIndex = 0
+            self.displayAns = [self.corrAnsArr[self.qIndex], self.wrong1Arr[self.qIndex], self.wrong2Arr[self.qIndex], self.wrong3Arr[self.qIndex]]
+            self.displayAns.shuffle() //randomizes the order of the array answers
+            self.endRound()
+        }
     }
     
     

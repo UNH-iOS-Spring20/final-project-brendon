@@ -11,15 +11,27 @@ import SwiftUI
 struct EndRoundScreen: View {
     @EnvironmentObject var round: Round
     @EnvironmentObject var screen: ScreenController
+    
     var body: some View {
         VStack{
-            Text("Round \(round.r) \(round.roundResult)")
-            Text("Your Score: \(round.roundScore)")
-            Text("Opponent Score: \(round.opRoundScore)")
-            Button(action: {self.screen.sWScreenButton()}) {
-            Text("Continue")
+            Text("Round \(round.r) \(round.roundResult)").font(.largeTitle).padding(10)
+            
+            Text("Your Score: \(round.roundScore)").font(.title).padding(10)
+            Text("Opponent Score: \(round.opRoundScore)").font(.title).padding(10)
+            Button(action: {
+                self.screen.sWScreenButton()
+                self.round.roundContinue = true
+                self.round.roundScore = 0
+                self.round.strikes = 0
+                self.round.opRoundScore = 0
+                self.round.roundResult = ""
+                self.round.answerStreak = 0
+                self.round.r+=1
+            }) {
+                Text("Continue").font(.headline).padding(10)
             }
-        }
+    
+        }.background(/*@START_MENU_TOKEN@*/Color(hue: 0.008, saturation: 0.944, brightness: 0.476)/*@END_MENU_TOKEN@*/)
     }
 }
 
