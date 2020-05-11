@@ -6,6 +6,8 @@
 //  Copyright © 2020 Brendon Malouf. All rights reserved.
 //
 
+import SwiftUI
+
 class Player{
     //The following constants xp required to level up
     let maxLevelXP1 = 5000 //5000xp upgrades player to level 2
@@ -19,7 +21,6 @@ class Player{
     var totalXP:Int //Player's total Career XP
     var level:Int = 1 //Player's current level (based on xp)
     var currStreak:Int = 0 //Player's current win streak
-    var gameScore:Int = 0 //Score in the current game
     
 //---------------------------------------------------------------
     //initializes a Player object
@@ -30,7 +31,6 @@ class Player{
         self.userName = userName
         self.totalXP = totalXP
         self.currStreak = currStreak
-        self.gameScore = 0
         //level = 1
         setLevel()
     }
@@ -78,5 +78,8 @@ class Player{
      */
     func baseLossXP(){
         totalXP = totalXP - (XPArr[level-1] / 20)
+        if totalXP < 0{
+            totalXP = 0
+        }
     }
 }

@@ -10,17 +10,20 @@ import SwiftUI
 import UIKit
 
 struct CategoryWheel: View{
-    //var wheel:WheelController
-    
+    @EnvironmentObject var wheel:WheelController
+    let catArray:[String] = ["All NFL", "All NBA", "All MLB", "Pros in College (NFL)", "Pros in College (NBA)"]
+    let index:Int = 0
     var body: some View {
-        WheelControllerWrapper().scaledToFit()
-                .background(/*@START_MENU_TOKEN@*/Color(hue: 0.008, saturation: 0.944, brightness: 0.476)/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 25){
+            WheelControllerWrapper().scaledToFit()
+                .background(Color.gray)
+        }
     }
-}
-
-struct CategoryWheel_Previews: PreviewProvider {
-    //static let wheel = WheelController()
-    static var previews: some View {
-        CategoryWheel()
+    
+    struct CategoryWheel_Previews: PreviewProvider {
+        static let wheel = WheelController()
+        static var previews: some View {
+            CategoryWheel().environmentObject(wheel)
+        }
     }
 }

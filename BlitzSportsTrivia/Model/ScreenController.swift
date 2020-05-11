@@ -11,7 +11,10 @@ import SwiftUI
 class ScreenController: ObservableObject {
      @Published var screen:String //used to determine which screen should be showing
     
+    @Published var showCategory:Bool = false //to show category in wheel screen
+    @Published var catIndex:Int = 0
     init() {
+        showCategory = false
         screen = "MainScreen" //sets the initial screen to Main screen
     }
     
@@ -30,6 +33,9 @@ class ScreenController: ObservableObject {
     }
     func qSButton(){
         self.screen = "QuestionScreen"
+    }
+    func eGButton(){
+        self.screen = "EndGame"
     }
     
 }

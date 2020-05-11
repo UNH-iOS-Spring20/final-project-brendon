@@ -36,7 +36,6 @@ class WheelController: UIViewController, ObservableObject, SpinWheelControlDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         let buttonX = 150 //x-coordinate of button
         let buttonY = 375 //y-coordinate of button
         let buttonWidth = 100
@@ -45,7 +44,7 @@ class WheelController: UIViewController, ObservableObject, SpinWheelControlDataS
         let button = UIButton(type: .system)
         button.setTitle("Spin Wheel", for: .normal) //initializes "Spin Wheel" Button
         button.tintColor = .white
-        button.backgroundColor = .red
+        button.backgroundColor = .blue
        
         button.frame = CGRect(x: buttonX, y: buttonY, width: buttonWidth, height: buttonHeight) //sets the button frame
         
@@ -86,6 +85,7 @@ class WheelController: UIViewController, ObservableObject, SpinWheelControlDataS
         print("Value changed to " + categorySelected)
         //used to print the category selected to the WheelScreen
         
+        
     }
     
     func resetCategorySelected(){
@@ -103,7 +103,8 @@ class WheelController: UIViewController, ObservableObject, SpinWheelControlDataS
     
     //spins the wheel
     func spinWheel(){
-        spinWheelControl.randomSpin()
+        //spinWheelControl.randomSpin()
+        spinWheelControl.spin(velocityMultiplier: 0.5)
     }
 }
 

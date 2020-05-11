@@ -9,12 +9,13 @@
 import SwiftUI
 import FirebaseFirestore
 
+
 class Round: ObservableObject{
     let db = Firestore.firestore()
-    
     @EnvironmentObject var screen:ScreenController
     
-    //var collectionArr: [String] = []
+    var collectionArr: [String] = []
+    var cAIndex: Int
     
     var r:Int //round number
     var playerSpinning:Player
@@ -26,10 +27,13 @@ class Round: ObservableObject{
     @Published var blitzAvail:Bool = false
     @Published var blitzOn:Bool = false
     @Published var roundContinue:Bool = true
+    @Published var gameOver:Bool = false
     @Published var roundScore:Int //stores player's current round score
+    @Published var gameScore:Int //stores player's current gamescore
     @Published var opRoundScore:Int //Other players round score
+    @Published var opGameScore:Int //Other players gamescore
     @Published var roundResult:String
-    
+    @Published var gameResult:String
     @Published var answerStreak:Int
     @Published var strikes:Int //keeps track of how many wrong answers the player got wrong in the round
     
@@ -41,17 +45,23 @@ class Round: ObservableObject{
     @Published var displayAns = [String]()
     
     init(p1: Player, p2: Player, r: Int) {
+        self.collectionArr = ["mlb-questions","nfl-colleges","nfl-questions","nba-colleges", "nba-questions"]
+        self.cAIndex = 0
         self.blitzAvail = false
         self.blitzOn = false
         self.roundContinue = true
+        self.gameOver = false
         self.playerSpinning = p1
         self.otherPlayer = p2
         self.r = r
         self.qIndex = 0
         self.roundScore = 0
+        self.gameScore = 0
+        self.opGameScore = 0
         self.strikes = 0
         self.opRoundScore = 0
         self.roundResult = ""
+        self.gameResult = ""
         self.answerStreak = 0
         self.choiceSelected = -1 //-1 before an answer is selected
         
@@ -62,7 +72,7 @@ class Round: ObservableObject{
         self.wrong2Arr = [String](repeating: "", count: 100)
         self.wrong3Arr = [String](repeating: "", count: 100)
         self.displayAns = [String](repeating: "", count: 4)
-        generateQuestions()
+        generateQuestions(category: collectionArr[0])
         
     }
     
@@ -72,14 +82,15 @@ class Round: ObservableObject{
         
     }
     
-    func generateQuestions(){ // based on the players spin, will generate 20 randomized questions of that category
+    func generateQuestions(category: String){ // based on the players spin, will generate 20 randomized questions of that category
         var qArr = [String]()
         var cArr = [String]()
         var wArr1 = [String]()
         var wArr2 = [String]()
         var wArr3 = [String]()
         
-        db.collection("nfl-questions").getDocuments() { (querySnapshot, err) in
+        //db.collection("nfl-questions").getDocuments() { (querySnapshot, err) in
+        db.collection(category).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -111,15 +122,30 @@ class Round: ObservableObject{
     func endRound(){
         self.opRoundScore = Int(arc4random_uniform(13) + 2) //for testing purposes generates a random score between 2 and 14
         if (self.roundScore > self.opRoundScore){
+            self.gameScore+=1
             self.roundResult = "Winner"
         }
         else if(self.roundScore < self.opRoundScore){
+            self.opGameScore+=1
             self.roundResult = "Loser"
         }
         else{ self.roundResult = "Tie" }
         
-        roundContinue = false //this lets question screen know that the round has ended.
-         
+        if(self.gameScore == 3){
+            self.gameResult = "Winner!"
+            gameOver = true
+        }
+        else if(self.opGameScore == 3){
+            self.gameResult = "Tough Loss..."
+            gameOver = true
+        }
+        else if((self.gameScore != 3 && self.opGameScore != 3) && self.r == 5){
+            self.gameResult = "Game was tied"
+            gameOver = true
+        }
+        else{
+            roundContinue = false //this lets question screen know that the round has ended.
+        }
     }
     
     func selectAns(){
@@ -148,6 +174,10 @@ class Round: ObservableObject{
         }
         else{
             self.qIndex = 0
+            if cAIndex < 4{
+                cAIndex+=1
+                generateQuestions(category: self.collectionArr[cAIndex])
+            }
             self.displayAns = [self.corrAnsArr[self.qIndex], self.wrong1Arr[self.qIndex], self.wrong2Arr[self.qIndex], self.wrong3Arr[self.qIndex]]
             self.displayAns.shuffle() //randomizes the order of the array answers
             self.endRound()

@@ -29,6 +29,9 @@ struct ContentView: View {
             if screen.screen == "EndRound"{
                 EndRoundScreen()
             }
+            if screen.screen == "EndGame"{
+                EndGameScreen()
+            }
         }
     }
 }
