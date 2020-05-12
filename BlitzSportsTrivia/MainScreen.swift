@@ -10,41 +10,54 @@ import SwiftUI
 
 struct MainScreen: View {
     //@EnvironmentObject var game:Game
+    @EnvironmentObject var core:Core
     @EnvironmentObject var screen: ScreenController
     var body: some View {
         ZStack{
-            //Color.black  //sets Background color to black
+            Color.blue //sets Background color to blue
             
             VStack{
-                HeaderView() //A call to the default Logo header
+                //HeaderView() //A call to the default Logo header
+                Text("Blitz Sports Trivia")
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .foregroundColor(Color.yellow)
+                Button(action: {
+                    if(self.core.signOut()){
+                        self.screen.fSButton()
+                    }
+                    
+                }) { //MyStats button
+                    Text("Logout")
+                        .frame(width: 100,height: 55).foregroundColor(Color.black).background(Color.yellow).cornerRadius(10).padding(.top,40)
+                }
+
+
                 Button(action: {}) { //MyStats button
                     Text("MyStats")
-                        .font(.headline).foregroundColor(Color.white).padding(10)
+                        .frame(width: 250,height: 55).foregroundColor(Color.black).background(Color.yellow).cornerRadius(10).padding(.top,40)
                 }
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) { //View Leaderboards button
                     Text("View Leaderboards")
-                        .font(.headline).foregroundColor(Color.white).padding(10)
+                        .frame(width: 250,height: 55).foregroundColor(Color.black).background(Color.yellow).cornerRadius(10).padding(.top,25)
                 }
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) { //Challenge Friend button
                     Text("Challenge Friend")
-                        .font(.headline).foregroundColor(Color.white).padding(10)
+                        .frame(width: 250,height: 55).foregroundColor(Color.black).background(Color.yellow).cornerRadius(10).padding(.top,25)
                 }
                 Button(action: {self.screen.sWScreenButton()}) { //play vs cpu button
                     Text("Play vs CPU")
-                        .font(.headline).foregroundColor(Color.white).padding(10)
+                        .frame(width: 250,height: 55).foregroundColor(Color.black).background(Color.yellow).cornerRadius(10).padding(.top,25)
                 }
                 Button(action: {}) { //Settings button
                     Text("Settings")
-                        .font(.headline).foregroundColor(Color.white).padding(10)
+                        .frame(width: 250,height: 55).foregroundColor(Color.black).background(Color.yellow).cornerRadius(10).padding(.top,25)
                 }
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) { // Frequently Asked Questions button
                     Text("FAQ")
-                        .font(.headline).foregroundColor(Color.white).padding(10)
+                        .frame(width: 250,height: 55).foregroundColor(Color.black).background(Color.yellow).cornerRadius(10).padding(.top,25)
                 }
-                
-                Image("HelmetCatch").resizable().frame(width:375,height:305)
-                    //Pulls up an image of Kobe
-                
+
                 Spacer() //Pushes the VStack to the top of the screen
             }
             .padding()

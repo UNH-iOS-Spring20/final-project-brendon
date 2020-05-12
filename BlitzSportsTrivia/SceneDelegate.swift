@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     lazy var p2:Player = game.player2
     lazy var r:Int = game.roundNum
     lazy var round = Round(p1: p1, p2: p2, r: r)
-    
+    var core:Core = Core()
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(round).environmentObject(screen).environmentObject(wheel).environmentObject(game))
+            window.rootViewController = UIHostingController(rootView: contentView.environmentObject(round).environmentObject(screen).environmentObject(wheel).environmentObject(game).environmentObject(core))
             self.window = window
             window.makeKeyAndVisible()
         }

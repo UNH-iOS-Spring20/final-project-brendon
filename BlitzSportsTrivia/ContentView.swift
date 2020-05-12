@@ -15,6 +15,17 @@ struct ContentView: View {
         //Text("Hello, World!")
         //MainScreen()
         VStack{
+            if screen.screen == "FirstScreen"{
+                FirstScreen()
+            }
+            if screen.screen == "SignIn"{
+                SignInScreen()
+            }
+            
+            if screen.screen == "SignUp"{
+                SignUpScreen()
+            }
+        
             if screen.screen == "MainScreen"{
                 MainScreen()
             }

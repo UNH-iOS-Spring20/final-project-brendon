@@ -15,9 +15,20 @@ class ScreenController: ObservableObject {
     @Published var catIndex:Int = 0
     init() {
         showCategory = false
-        screen = "MainScreen" //sets the initial screen to Main screen
+        screen = "FirstScreen" //sets the initial screen to Main screen
     }
     
+    func fSButton(){
+        self.screen = "FirstScreen"
+    }
+    
+    func sIButton(){
+        self.screen = "SignIn"
+    }
+    
+    func sUButton(){
+        self.screen = "SignUp"
+    }
     
     func sWScreenButton(){
         //mainscreen playCPU button
